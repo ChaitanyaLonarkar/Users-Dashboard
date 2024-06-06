@@ -1,5 +1,57 @@
 body{
   padding: 0;
   margin: 0;
+  
 }
 
+.body{
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(226, 226, 249,75%);
+}
+.dashboard{
+  height: 41rem;
+  width: 56rem;
+  background-color: #262A41;
+}
+.right{
+
+}
+
+.users-container{
+  height: 90%;
+  overflow: auto;
+  scrollbar-width:thin ;
+  
+}
+
+.pic img{
+  border-radius: 50%;
+  width: 57px;
+}
+.user{
+  background-color: #3c3f548a;
+  cursor: pointer;
+}
+.users-container{
+  gap: 0.7rem;
+}
+.spinner{
+  height: 94%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.spinner.inner{
+  width: 3rem;
+  height: 3rem;
+}
+.uicon{
+  font-size: 2.5rem;
+    color: #00ffc9;
+}
