@@ -28,6 +28,7 @@ body{
   
 }
 
+
 .pic img{
   border-radius: 50%;
   width: 57px;
@@ -52,6 +53,38 @@ body{
   height: 3rem;
 }
 .uicon{
-  font-size: 2.5rem;
-    color: #00ffc9;
+  font-size: 2.3rem;
+    /* color: #00ffc9; */
+    color: white;
+}
+.user p{
+  color: #bbbbbb;
+    font-size: 0.80rem;
+}
+.infoicon{
+  font-size: 2.05rem;
+}
+h3{
+  margin: 0;
+}
+.details h6{
+  font-size: 1rem;
+}
+.details{
+  gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.right h5{
+  margin: 2rem 0rem 1rem;
+}
+.selected-user{
+  font-size: 1.01rem;
+}
+.right{
+  margin: 4.4rem 1.3rem 1.3rem 1rem;
+}
+.selected-user img{
+  width: 5rem;
 }

@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FaUsersGear } from "react-icons/fa6";
+import { FaUsers } from "react-icons/fa6";
+import { RiUserSearchFill } from "react-icons/ri";
+
+import Button from 'react-bootstrap/Button';
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -30,11 +33,12 @@ export default function Users() {
     <>
       <div className="body d-flex justify-content-center align-items-center ">
         <div className="dashboard rounded-4 d-flex  ">
-          <div className="left text-white p-3 w-50">
-            <div className="d-flex gap-3 align-items-center">
-                <FaUsersGear className="uicon" />
+          <div className="left pe-0 text-white p-3 w-50">
+            <div className="d-flex gap-3 ps-2 align-items-center">
+              <FaUsers className="uicon" />
 
-              <h3>All Users</h3>
+              <h3 style={{fontSize:"1.4rem",margin:"0"}}>All Users</h3>
+              {/* <p className="m-0">Scroll to get all user</p> */}
             </div>
 
             <div className="users-container d-flex flex-column  pointer mt-3 m  ">
@@ -52,10 +56,14 @@ export default function Users() {
                 ""
               )}
               {users.map((user, key) => (
-                <div className="user  align-items-center d-flex gap-3 p-2 ps-3 rounded-4">
+                <div
+                  className="user  align-items-center d-flex gap-3 p-2 ps-3 rounded-4"
+                  key={user.id}
+                  onClick={() => handleUserClick(user)}
+                >
                   <div className="pic">
                     <img
-                      src={`https://randomuser.me/api/portraits/med/men/${key}.jpg`}
+                      src={`https://randomuser.me/api/portraits/med/men/${user.id}.jpg`}
                       alt="avatar"
                     />
                     {/* <img src={user.avatar} alt="avatar" /> */}
@@ -73,9 +81,33 @@ export default function Users() {
               ))}
             </div>
           </div>
-          <div className="right w-50 rounded-3 m-3 p-3 bg-white">
-            <h2>User Information</h2>
-            <p>Click the more nutton to get the user information</p>
+          <div className="right  w-50 rounded-3 p-3 bg-white">
+            <div className="d-flex gap-2 align-items-center">
+              <RiUserSearchFill className="infoicon" />
+              <h3 style={{fontSize:"1.4rem",margin:"0"}}>User Information</h3>
+            </div>
+
+            {selectedUser?
+            <div className="selected-user ps-3 mt-5">
+                <div className="mb-2">
+                    <img src={`https://randomuser.me/api/portraits/med/men/${selectedUser.id}.jpg`} alt="" srcset="" />
+                </div>
+                <p className="mb-1"><b>Username : </b>{selectedUser.profile.username}</p>
+                <p className="mb-1"><b>Firstname : </b>{selectedUser.profile.firstName}</p>
+                <p className="mb-1"><b>Lastname : </b>{selectedUser.profile.lastName}</p>
+                <p className="mb-1"><b>Bio : </b>{selectedUser.Bio}</p>
+                <p className="mb-1"><b>Work as a : </b>{selectedUser.jobTitle}</p>
+                <p className="mb-1"><b>Email Id : </b>{selectedUser.profile.email}</p>
+                <p className="mb-1"><b>Id no. : </b>{selectedUser.id}</p>
+                <Button variant="primary " className="mt-2 px-3" onClick={()=>setSelectedUser(null)}>Close Info</Button>{' '}
+
+            </div>:(<div>
+                <h5><b>No data to show</b></h5>
+                <p>Click the <b>User</b> to get the their information</p>
+
+                </div>
+        )}
+            
           </div>
         </div>
       </div>
