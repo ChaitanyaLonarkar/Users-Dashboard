@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { FaUsers } from "react-icons/fa6";
 import { RiUserSearchFill } from "react-icons/ri";
@@ -12,6 +12,9 @@ export default function Users() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+
+  const infoElement = useRef();
+
   useEffect(() => {
     axios
       .get("https://602e7c2c4410730017c50b9d.mockapi.io/users")
@@ -23,17 +26,33 @@ export default function Users() {
         setError("Failed to fetch data");
         setLoading(false);
       });
+      
   }, []);
-
+  
+  
   const handleUserClick = (user) => {
     setSelectedUser(user);
+    if(window.innerWidth <= 560){
+      infoElement.current.style.display="block"
+      // close.current.style.display="block"
+    }
+    
   };
 
+  const hide=()=>{
+    if(window.innerWidth <= 560){
+      infoElement.current.style.display="none"
+    }
+   
+  }
+  const setnull=()=>{
+    setSelectedUser(null)
+  }
   return (
     <>
       <div className="body d-flex justify-content-center align-items-center ">
         <div className="dashboard rounded-4 d-flex  ">
-          <div className="left pe-0 text-white p-3 w-50">
+          <div className="left pe-0 text-white p-3 ">
             <div className="d-flex gap-3 ps-2 align-items-center">
               <FaUsers className="uicon" />
 
@@ -81,14 +100,14 @@ export default function Users() {
               ))}
             </div>
           </div>
-          <div className="right  w-50 rounded-3 p-3 bg-white">
+          <div className="right rounded-3 p-3 bg-white" ref={infoElement}>
             <div className="d-flex gap-2 align-items-center">
               <RiUserSearchFill className="infoicon" />
               <h3 style={{fontSize:"1.4rem",margin:"0"}}>User Information</h3>
             </div>
 
             {selectedUser?
-            <div className="selected-user ps-3 mt-5">
+            <div className="selected-user mt-5">
                 <div className="mb-2">
                     <img src={`https://randomuser.me/api/portraits/med/men/${selectedUser.id}.jpg`} alt="" srcset="" />
                 </div>
@@ -99,12 +118,12 @@ export default function Users() {
                 <p className="mb-1"><b>Work as a : </b>{selectedUser.jobTitle}</p>
                 <p className="mb-1"><b>Email Id : </b>{selectedUser.profile.email}</p>
                 <p className="mb-1"><b>Id no. : </b>{selectedUser.id}</p>
-                <Button variant="primary " className="mt-2 px-3" onClick={()=>setSelectedUser(null)}>Close Info</Button>{' '}
+                <Button variant="primary " className="mt-2 px-3" onClick={()=>setnull()} >Close Info</Button>{' '}
 
-            </div>:(<div>
+            </div>:(<div className="null">
                 <h5><b>No data to show</b></h5>
                 <p>Click the <b>User</b> to get the their information</p>
-
+                  <Button  variant="danger"className="mt-2 px-3 bttn"  onClick={()=>hide()}>Close</Button>
                 </div>
         )}
             
